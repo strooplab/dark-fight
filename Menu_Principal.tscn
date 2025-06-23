@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://dl6ikm2kp8fre"]
+
+[ext_resource type="Script" path="res://menu_principal.gd" id="1_ct3mp"]
+[ext_resource type="Texture2D" uid="uid://cycubbxgjap00" path="res://Source/ChatGPT Image 6 jun 2025, 01_55_45 a.m..png" id="1_gvqjq"]
+[ext_resource type="FontFile" uid="uid://bm4ncvwemklet" path="res://Source/Seagram tfb.ttf" id="2_rx0s6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vyex"]
+bg_color = Color(0.89293, 0.157371, 0.270005, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twfy5"]
+bg_color = Color(0.333333, 0.0392157, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5umiu"]
+bg_color = Color(0.438042, 0.0144037, 0.0155343, 1)
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_ct3mp")
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -15.0
+offset_top = -70.0
+offset_right = 1173.0
+offset_bottom = 698.0
+texture = ExtResource("1_gvqjq")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 241.0
+offset_top = 130.0
+offset_right = 966.0
+offset_bottom = 279.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/table_border = Color(0, 0, 0, 1)
+theme_override_colors/table_even_row_bg = Color(0, 0, 0, 1)
+theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.768627, 0.0666667, 0.141176, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/selection_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_rx0s6")
+theme_override_font_sizes/bold_italics_font_size = 3
+theme_override_font_sizes/italics_font_size = 5
+theme_override_font_sizes/mono_font_size = 6
+theme_override_font_sizes/normal_font_size = 90
+text = "DARK FIGHT"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+z_index = 1
+offset_left = -74.0
+offset_top = -153.0
+offset_right = 1212.0
+offset_bottom = 866.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_2vyex")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_twfy5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5umiu")
+text = "INICIAR"

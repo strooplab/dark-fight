@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://cp21lxpy63i6"]
+
+[ext_resource type="Texture2D" uid="uid://cycubbxgjap00" path="res://Source/ChatGPT Image 6 jun 2025, 01_55_45 a.m..png" id="1_rtuj7"]
+[ext_resource type="Texture2D" uid="uid://c8i00f1dks2me" path="res://Source/ground-dark-black-floor-3.jpg" id="2_ujvsp"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wggl6"]
+panorama = ExtResource("1_rtuj7")
+
+[sub_resource type="Sky" id="Sky_dtsbv"]
+sky_material = SubResource("PanoramaSkyMaterial_wggl6")
+
+[sub_resource type="Environment" id="Environment_smqpr"]
+background_mode = 2
+sky = SubResource("Sky_dtsbv")
+sky_rotation = Vector3(0, 0, 2.26369)
+ambient_light_color = Color(0.00428807, 0.0210179, 0.0319446, 1)
+ambient_light_energy = 2.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gawup"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ancnr"]
+albedo_texture = ExtResource("2_ujvsp")
+
+[sub_resource type="BoxMesh" id="BoxMesh_w75sn"]
+material = SubResource("StandardMaterial3D_ancnr")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ub5sc"]
+
+[node name="Escenario" type="Node3D"]
+
+[node name="Terreno" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.60865, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Terreno"]
+environment = SubResource("Environment_smqpr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Terreno"]
+transform = Transform3D(0.646623, -0.07337, 0.759273, -0.73938, 0.184519, 0.647511, -0.187608, -0.980087, 0.0650656, 664.169, 208.155, -31.5442)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, 30, 0, 0, 0, 1000, 0, -15, -453.691)
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_gawup")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_w75sn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_ub5sc")

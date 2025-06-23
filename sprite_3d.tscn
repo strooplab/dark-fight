@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://qsk0bfxycha3"]
+
+[ext_resource type="Script" path="res://sprite_3d.gd" id="1_2sbnh"]
+[ext_resource type="Script" path="res://barra_df_01.gd" id="1_gh78n"]
+[ext_resource type="FontFile" uid="uid://dcl6d6bcv3gpy" path="res://Source/Fonts/gothferatu.ttf" id="2_fnhn8"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_alop1"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o0vwo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqav1"]
+bg_color = Color(0.480142, 0.914261, 0.45329, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2u4wc"]
+bg_color = Color(0.961218, 0.960167, 0.959268, 1)
+border_color = Color(0.0338533, 0.0338533, 0.0338532, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c03c1"]
+bg_color = Color(0.864166, 0.353884, 0.436277, 1)
+border_color = Color(0.0807833, 0.0807834, 0.0807833, 1)
+
+[node name="Sprite3D" type="Sprite3D"]
+transform = Transform3D(0.0256187, 0, -0.999672, 0, 1, 0, 0.999672, 0, 0.0256187, -0.0108407, 1.81119, 0.0118072)
+billboard = 1
+texture = SubResource("ViewportTexture_alop1")
+region_rect = Rect2(1, 1, 1, 1)
+script = ExtResource("1_2sbnh")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(65, 30)
+
+[node name="Barra_DF01" type="ProgressBar" parent="SubViewport"]
+z_index = 1
+anchors_preset = -1
+anchor_right = 0.867
+anchor_bottom = 0.315
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 0.215942
+offset_bottom = -0.12001
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_fnhn8")
+theme_override_font_sizes/font_size = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_o0vwo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lqav1")
+value = 100.0
+show_percentage = false
+script = ExtResource("1_gh78n")
+
+[node name="DamageBar" type="ProgressBar" parent="SubViewport/Barra_DF01"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_fnhn8")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/background = SubResource("StyleBoxFlat_2u4wc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c03c1")
+value = 100.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="SubViewport/Barra_DF01"]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="SubViewport/Barra_DF01/Timer" to="SubViewport/Barra_DF01" method="_on_timer_timeout"]

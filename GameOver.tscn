@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://vqds1vurv1dx"]
+
+[ext_resource type="Script" path="res://gameover.gd" id="1_8brth"]
+[ext_resource type="Texture2D" uid="uid://d01e2s5tlw5m1" path="res://Source/Textures/fire.jpg" id="1_gqhvv"]
+[ext_resource type="Texture2D" uid="uid://ba2ij1rr0238j" path="res://Source/Textures/darksoul.jpg" id="2_xhyi4"]
+[ext_resource type="FontFile" uid="uid://wpc1busgnca2" path="res://Source/Deutsch.ttf" id="3_y0o6c"]
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_8brth")
+
+[node name="ColorRect" type="TextureRect" parent="."]
+modulate = Color(0.266575, 0.266575, 0.266575, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gqhvv")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.41598, 0.41598, 0.41598, 1)
+offset_left = 122.0
+offset_top = 34.0
+offset_right = 1016.0
+offset_bottom = 593.0
+texture = ExtResource("2_xhyi4")
+expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Resultado" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_y0o6c")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+
+[node name="BotonReintentar" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.485703, 0.485704, 0.485703, 1)
+theme_override_fonts/font = ExtResource("3_y0o6c")
+theme_override_font_sizes/font_size = 31
+text = "Reintentar
+"
+
+[node name="BotonMenu" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_y0o6c")
+theme_override_font_sizes/font_size = 31
+text = "Menu
+"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BotonReintentar" to="." method="_on_reintentar_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BotonMenu" to="." method="_on_menu_pressed"]

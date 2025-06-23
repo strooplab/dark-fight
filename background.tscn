@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://y6p1ig45bqk2"]
+
+[ext_resource type="AudioStream" uid="uid://dtit3r4ghofip" path="res://Source/musica/background.mp3" id="1_47h3r"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_47h3r")
+volume_db = -3.0

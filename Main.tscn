@@ -1,0 +1,159 @@
+[gd_scene load_steps=25 format=3 uid="uid://dv8qw7jyn1o21"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_2x4nx"]
+[ext_resource type="PackedScene" uid="uid://cp21lxpy63i6" path="res://Escenario.tscn" id="1_bxuae"]
+[ext_resource type="PackedScene" uid="uid://d36hg0dfyxypl" path="res://DarkFighter01.tscn" id="4_cga6p"]
+[ext_resource type="PackedScene" uid="uid://c8fpllo37228x" path="res://Enemy.tscn" id="4_ngw61"]
+[ext_resource type="Shader" path="res://Main.gdshader" id="4_pw3tl"]
+[ext_resource type="PackedScene" uid="uid://vqds1vurv1dx" path="res://GameOver.tscn" id="5_6511a"]
+[ext_resource type="Script" path="res://enemy_healthbar.gd" id="5_mut8w"]
+[ext_resource type="Script" path="res://fighter_healthbar.gd" id="5_xh0w5"]
+[ext_resource type="FontFile" uid="uid://wpc1busgnca2" path="res://Source/Deutsch.ttf" id="6_frhr4"]
+[ext_resource type="Shader" path="res://text.gdshader" id="7_qqm6s"]
+[ext_resource type="Shader" path="res://Timer.gdshader" id="8_6pohg"]
+[ext_resource type="Script" path="res://timer.gd" id="8_q1yi5"]
+[ext_resource type="FontFile" uid="uid://bm4ncvwemklet" path="res://Source/Seagram tfb.ttf" id="10_djdd2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mc8i"]
+render_priority = 0
+shader = ExtResource("4_pw3tl")
+shader_parameter/porcentaje = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0n51v"]
+material = SubResource("ShaderMaterial_5mc8i")
+size = Vector2(2.5, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8x6rh"]
+render_priority = 0
+shader = ExtResource("4_pw3tl")
+shader_parameter/porcentaje = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8aksx"]
+material = SubResource("ShaderMaterial_8x6rh")
+size = Vector2(2.5, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orkdy"]
+render_priority = 0
+shader = ExtResource("7_qqm6s")
+shader_parameter/base_color = Vector3(0, 0, 0)
+shader_parameter/highlight_color = Vector4(1, 0.85, 0.5, 1)
+shader_parameter/light_width = 0.2
+shader_parameter/light_speed = 0.7
+shader_parameter/light_strength = 1.0
+
+[sub_resource type="TextMesh" id="TextMesh_drlwk"]
+material = SubResource("ShaderMaterial_orkdy")
+text = "VS"
+font = ExtResource("6_frhr4")
+font_size = 127
+depth = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gym4r"]
+render_priority = 0
+shader = ExtResource("8_6pohg")
+shader_parameter/base_color = Color(0.5, 0, 0, 1)
+shader_parameter/rim_power = 2.0
+shader_parameter/rim_intensity = 0.5
+shader_parameter/rim_color = Color(1, 0.3, 0.2, 1)
+shader_parameter/roughness = 0.7
+shader_parameter/metallic = 0.1
+
+[sub_resource type="TextMesh" id="TextMesh_788n8"]
+material = SubResource("ShaderMaterial_gym4r")
+text = "99"
+font = ExtResource("6_frhr4")
+font_size = 127
+depth = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nysa"]
+
+[sub_resource type="TextMesh" id="TextMesh_lhpab"]
+material = SubResource("ShaderMaterial_2nysa")
+text = "Ubiet"
+font = ExtResource("10_djdd2")
+depth = 0.02
+
+[sub_resource type="TextMesh" id="TextMesh_p07oh"]
+material = SubResource("ShaderMaterial_2nysa")
+text = "Diego"
+font = ExtResource("10_djdd2")
+depth = 0.02
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_2x4nx")
+
+[node name="TitleScreen" type="CanvasLayer" parent="."]
+
+[node name="Gameover" parent="TitleScreen" instance=ExtResource("5_6511a")]
+visible = false
+
+[node name="GameManager" type="Node" parent="."]
+
+[node name="Escenario" parent="." instance=ExtResource("1_bxuae")]
+
+[node name="Jugadores" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.8235, 0, -48.6908)
+
+[node name="DarkFighter" parent="Jugadores" instance=ExtResource("4_cga6p")]
+transform = Transform3D(-5, 0, -7.54979e-07, 0, 5, 0, 7.54979e-07, 0, -5, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Jugadores/DarkFighter"]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, -2.36262, 1.31713, 1.55614)
+current = true
+
+[node name="Enemy_Healthbar" type="MeshInstance3D" parent="Jugadores/DarkFighter/Camera3D" node_paths=PackedStringArray("health_bar_e")]
+transform = Transform3D(5, -3.17865e-07, 1.38943e-14, 0, -2.18557e-07, -5, 3.17865e-07, 5, -2.18557e-07, 9.70257, 7.1357, -12.9504)
+mesh = SubResource("PlaneMesh_0n51v")
+skeleton = NodePath("../../../Enemy")
+script = ExtResource("5_mut8w")
+health_bar_e = NodePath(".")
+
+[node name="Enemy_Healthbar2" type="MeshInstance3D" parent="Jugadores/DarkFighter/Camera3D" node_paths=PackedStringArray("health_bar_e")]
+transform = Transform3D(5, -2.15621e-07, -3.15021e-07, -1.2835e-07, 2.93631, -4.04698, 3.59523e-07, 4.04698, 2.93631, 9.72054, 7.51851, -13.0656)
+mesh = SubResource("PlaneMesh_0n51v")
+skeleton = NodePath("../../../Enemy")
+script = ExtResource("5_mut8w")
+health_bar_e = NodePath(".")
+
+[node name="Fighter_Healthbar" type="MeshInstance3D" parent="Jugadores/DarkFighter/Camera3D" node_paths=PackedStringArray("health_bar")]
+transform = Transform3D(5, -3.17865e-07, 2.18557e-07, 2.18557e-07, 9.55343e-15, -5, 3.17865e-07, 5, 2.34478e-14, -9.6855, 7.1357, -12.9504)
+mesh = SubResource("PlaneMesh_8aksx")
+skeleton = NodePath("../../../Enemy")
+script = ExtResource("5_xh0w5")
+health_bar = NodePath(".")
+
+[node name="Fighter_Healthbar2" type="MeshInstance3D" parent="Jugadores/DarkFighter/Camera3D" node_paths=PackedStringArray("health_bar")]
+transform = Transform3D(5, 0, 0, 0, 2.93893, -4.04508, 0, 4.04508, 2.93893, -9.70417, 7.5362, -13.098)
+mesh = SubResource("PlaneMesh_8aksx")
+skeleton = NodePath("../../../Enemy")
+script = ExtResource("5_xh0w5")
+health_bar = NodePath(".")
+
+[node name="VS" type="MeshInstance3D" parent="Jugadores/DarkFighter/Camera3D"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 1.43051e-06, 4.61902, -11.8926)
+mesh = SubResource("TextMesh_drlwk")
+
+[node name="Timer" type="MeshInstance3D" parent="Jugadores/DarkFighter/Camera3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.43051e-06, 6.9705, -11.8926)
+mesh = SubResource("TextMesh_788n8")
+script = ExtResource("8_q1yi5")
+
+[node name="Timer" type="Timer" parent="Jugadores/DarkFighter/Camera3D/Timer"]
+
+[node name="DarkFighter_name" type="MeshInstance3D" parent="Jugadores/DarkFighter/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29336, 0.476475, -1.21743)
+mesh = SubResource("TextMesh_lhpab")
+
+[node name="Enemy_name" type="MeshInstance3D" parent="Jugadores/DarkFighter/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24359, 0.476475, -1.21743)
+mesh = SubResource("TextMesh_p07oh")
+
+[node name="Enemy" parent="Jugadores" instance=ExtResource("4_ngw61")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, -20.9779)
+detection_range = 30.0
+attack_range = 12.0
+
+[connection signal="dead" from="Jugadores/DarkFighter" to="." method="_on_dark_fighter_dead"]
+[connection signal="tiempo_agotado" from="Jugadores/DarkFighter/Camera3D/Timer" to="." method="_on_timer_tiempo_agotado"]
+[connection signal="timeout" from="Jugadores/DarkFighter/Camera3D/Timer/Timer" to="." method="_on_timer_timeout"]
+[connection signal="dead" from="Jugadores/Enemy" to="." method="_on_enemy_dead"]
